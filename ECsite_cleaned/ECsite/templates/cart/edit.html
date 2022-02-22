@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>編集</title>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+    <input type="number" name="amount" value="1">
+    <input type="submit" value="カートに入れる">
+</form>
+</body>
+</html>

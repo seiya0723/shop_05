@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ accounts.username }}さんの住所登録</title>
+    <script src="{% static 'accounts/js/ajaxzip3.js' %}"></script>
+</head>
+<body>
+<form method="POST" action="{% url 'accounts:address' user.id %}">
+    {% csrf_token %}
+    〒<input type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');"><br>
+    <input type="text" name="pref01" size="20"><br>
+    <input type="text" name="addr01" size="60">
+    <input type="submit" value="登録">
+</form>
+
+
+</body>
+</html>

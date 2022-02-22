@@ -1,0 +1,77 @@
+{% extends 'products/base.html' %} {% block content %}
+<div class="my-5">
+    <div class="row product">
+        <div class="col-md-6 mb-4 text-center">
+            {% if images.product_id == products.id %}
+            {% for image in images %}
+            <img src="{{ image.image.url }}" class="img-fluid">
+            {% endfor %}
+            {% elif products.image != Null %}
+            <img src="{{ products.image.url }}" class="img-fluid">
+            {% else %}
+            <img src="/media/shop/product_image/images/no_image.png" class="img-fluid">
+            {% endif %}
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body px-2 py-1">
+                    <h3>{{ products.name }}</h3>
+                    <p class="mb-3">{{ products.category }}</p>
+                    <hr/>
+                    <p>
+                        価格：<span class="text-danger font-weight-bold">{{ products.price }}円</span>
+                    </p>
+                    <p class="font-weight-bold">商品説明</p>
+                    <p>{{ products.description|linebreaksbr }}</p>
+                    <form action="{% url 'products:product_detail' products.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" name="amount" value="1" min="1">
+                        <input class="btn btn-primary" type="submit" value="カートに入れる">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>{{ products.name }}</title>-->
+<!--    <link rel="stylesheet" href="{% static 'products/css/product_detail.css' %}">-->
+<!--    <link rel="stylesheet" href="{% static 'products/css/slick.css' %}">-->
+<!--    <script src="{% static 'products/js/jquery-3.6.0.min.js' %}"></script>-->
+<!--    <script src="{% static 'products/js/slick.min.js' %}"></script>-->
+<!--    <script src="{% static 'products/js/product_detail.js' %}"></script>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--{% if images.product_id == products.id %}-->
+<!--    {% for image in images %}-->
+<!--    <img src="{{ image.image.url }}" >-->
+<!--    {% endfor %}-->
+<!--{% elif products.image != Null %}-->
+<!--    <img src="{{ products.image.url }}">-->
+<!--{% else %}-->
+<!--<img src="/media/shop/product_image/images/no_image.png">-->
+<!--{% endif %}-->
+
+<!--{{ products.name }}-->
+<!--{{ products.price }}-->
+<!--{{ products.description }}-->
+
+<!--<form action="{% url 'products:product_detail' products.id %}" method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="number" name="amount" value="1" min="1">-->
+<!--    <input class="btn btn-outline-success" type="submit" value="カートに入れる">-->
+<!--</form>-->
+
+<!--<a href="{% url 'shop:home' %}">戻る</a>-->
+
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,78 @@
+{% extends "shop/base.html" %} {% block content %}
+
+<div class="text-center my-5">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-6">
+      <div class="card img-thumbnail itemlist mb-3">
+          {% if product.image.url != Null %}
+          <img src="{{ product.image.url }}">
+          {% elif products.image != Null %}
+          <img src="{{ image.image.url }}">
+          {% else %}
+          <img src="/media/shop/product_image/images/no_image.png">
+          {% endif %}
+        <div class="card-body text-center px-2 py-3">
+          <p class="mb-0 text-secondary">{{ product.category }}</p>
+          <h5 class="font-weight-bold">{{ product.name }}</h5>
+          <h4 class="font-weight-bold">{{ product.price }}円</h4>
+        </div>
+        <a class="stretched-link" href="{% url 'products:product_detail' product.id %}"></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Home</title>-->
+<!--    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<a href="{% url 'contacts:contact' %}">お問い合わせ</a>-->
+<!--<a href="{% url 'accounts:cart' %}">カートを見る</a>-->
+<!--{% if user.id != Null %}-->
+<!--<a href="{% url 'accounts:my_page' user.id %}">マイページ</a>-->
+<!--<a href="{% url 'account_logout' %}">ログアウト</a>-->
+<!--{% else %}-->
+<!--<a href="{% url 'account_login' %}">ログイン</a>-->
+<!--{% endif %}-->
+<!--{% if user.is_staff == True %}-->
+<!--<a href="{% url 'products:products' %}">商品登録</a>-->
+<!--{% endif %}-->
+
+<!--<h4>ECサイト</h4>-->
+
+<!--<div id="column" class="column03">-->
+<!--    <ul>-->
+<!--        {% for product in products %}-->
+<!--        <li>-->
+<!--            <a href="{% url 'products:product_detail' product.id %}">-->
+<!--                {% if product.image.url != Null %}-->
+<!--                <img src="{{ product.image.url }}">-->
+<!--                {% else %}-->
+<!--                <img src="/media/shop/product_image/images/no_image.png">-->
+<!--                {% endif %}-->
+<!--                <p>{{ product.category }}<br>-->
+<!--                    {{ product.name }}<br>-->
+<!--                    {{ product.price }}円</p>-->
+<!--                {% if product.situation == True %}-->
+<!--                <p>販売中</p>-->
+<!--                {% else %}-->
+<!--                <p>在庫切れ</p>-->
+<!--                {% endif %}-->
+<!--            </a>-->
+<!--            <a href="{% url 'products:edit' product.id %}">商品編集</a>-->
+<!--        </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->

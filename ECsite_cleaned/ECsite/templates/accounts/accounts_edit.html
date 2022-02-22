@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>マイページの編集</title>
+</head>
+<body>
+
+<div class="account_edit">
+    {% if accounts.profile_image.url != Null %}
+    <div><img src="{{ accounts.profile_image.url }}"></div>
+    {% else %}
+    <img src="/media/images/default.png">
+    {% endif %}
+<form method="POST" enctype="multipart/form-data" action="{% url 'accounts:accounts_edit' user.id %}">
+    {% csrf_token %}
+    <div>プロフィール画像:<input type="file" name="profile_image"></div>
+    <div>ユーザー名:<input type="text" name="username" value="{{ user.username }}"></div>
+    <div>Eメールアドレス:{{ user.email }}</div>
+    <div>氏名:<input type="text" name="name" value="{{ user.name }}" disabled></div>
+    <div>ふりがな:<input type="text" name="name_kana" value="{{ user.name_kana }}" disabled></div>
+    <div><input type="submit" value="変更"></div>
+</form>
+
+<a href="{% url 'accounts:my_page' user.id %}">戻る</a>
+</div>
+</body>
+</html>

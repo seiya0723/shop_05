@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.username }}さんのマイページ</title>
+      <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+<body>
+
+<a href="{% url 'accounts:accounts_edit' user.id %}">編集</a>
+
+<div class="profile">
+    <ul>
+        <li>{% if user.profile_image.url != Null %}
+            <img src="{{ user.profile_image.url }}">
+            {% else %}
+            <img src="/media/images/default.png">
+            {% endif %}
+        </li>
+        <li>{{ object.username }}</li>
+        <li>{{ object.email }}</li>
+        <li>{{ object.name }}</li>
+        <li>{{ object.name_kana }}</li>
+    </ul>
+    <a href="{% url 'shop:home' %}">戻る</a>
+</div>
+</body>
+</html>

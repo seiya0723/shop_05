@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>商品登録</title>
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+    <script src="{% static 'products/js/script.js' %}"></script>
+    <script src="{% static 'products/js/jquery-3.6.0.min.js' %}"></script>
+</head>
+<body>
+
+<form method="POST" action="{% url 'products:products_category' %}">
+    {% csrf_token %}
+    <p>カテゴリー名:</p>
+    <input type="text" name="name" placeholder="書籍">
+    <input type="submit" value="登録">
+</form>
+
+<form method="POST" enctype="multipart/form-data" action="{% url 'products:products' %}">
+    {% csrf_token %}
+    <p>カテゴリー:</p>
+    <select name="category">
+        <option value="">未選択</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <p>サムネイル</p>
+    <input type="file" name="image">
+    <p>商品名:</p>
+    <input type="text" name="name">
+    <p>値段:</p>
+    <input type="number" name="price">
+    <p>運用状況:</p>
+    <input type="checkbox" name="situation">
+    <p>在庫数</p>
+    <input type="number" name="stock">
+    <p>説明</p>
+    <textarea name="description"></textarea>
+    <input type="submit" value="登録">
+</form>
+
+<form action="{% url 'products:products_images' %}">
+    {% csrf_token %}
+    <div id="image_area">
+        <p>画像登録:</p>
+        <input class="input_image" type="file" name="image">
+    </div>
+    <p>商品</p>
+    <select name="product">
+        <option value="">未指定</option>
+        {% for product in products %}
+        <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="登録">
+</form>
+
+
+
+{% for product in products %}
+<a href="{% url 'products:product_detail' product.id %}">個別ページ</a>
+{% endfor %}
+</body>
+</html>
